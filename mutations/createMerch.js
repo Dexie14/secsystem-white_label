@@ -9,16 +9,34 @@ export const createNewMerch = async ({
   name,
   email,
   address,
+  selectedColor,
+  selectedFile,
   handleCloseModal,
 }) => {
   try {
+
+    const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('address', address);
+      formData.append('primaryColor', selectedColor);
+      formData.append('image', selectedFile);
+
+
     const response = await axios.post(
-      `${BASE_URL}/merchant/create`,
+      `${BASE_URL}/merchant/create`,formData,
+      // {
+      //   name: name,
+      //   email: email,
+      //   address: address,
+      //   primaryColor: selectedColor,
+      //   image: formData
+      // },
       {
-        name: name,
-        email: email,
-        address: address,
-      },
+        headers: {
+         'content-type': 'multipart/form-data',
+        },
+      }
     );
     toast.success(response?.data?.message);
     handleCloseModal();

@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import { Toaster } from 'react-hot-toast';
 import "react-toastify/dist/ReactToastify.css";
 import QueryProviders from "@/context/query-provider";
+import { ThemeProvider } from "@/context/ThemeProvider";
 
 // import { Inter } from 'next/font/google'
 // const inter = Inter({ subsets: ['latin'] })
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/assets/logo.svg" />
       </head>
       <body className={DMSans.className} style={{ fontFamily: "DMSansMedium" }}>
+      <ThemeProvider>
         <QueryProviders>
           <ToastContainer
             position="top-right"
@@ -38,6 +40,7 @@ export default function RootLayout({ children }) {
           <Toaster/>
           {children}
         </QueryProviders>
+      </ThemeProvider>
       </body>
     </html>
   );

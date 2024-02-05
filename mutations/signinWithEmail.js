@@ -20,8 +20,9 @@ export const signinWithEmail = async ({
       }
     );
     if (response?.data?.status !== "error") {
-      // localStorage.setItem("token", response?.data?.data);
-      Cookies.set("token", response?.data?.data)
+      localStorage.setItem("color", response?.data?.data?.primaryColor);
+      localStorage.setItem("logo", response?.data?.data?.logo);
+      Cookies.set("token", response?.data?.data?.accessToken)
       return { success: true, data: response?.data?.message };
     } else {
       throw new Error(response?.data?.message);
