@@ -19,7 +19,7 @@
 @layer base {
   :root {
     /* --primary: #1f8f4f; */
-    --primary: #00000070;
+    --primary: black;
   }
 }
 

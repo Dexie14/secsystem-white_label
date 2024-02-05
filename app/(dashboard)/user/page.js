@@ -1,28 +1,50 @@
 "use client"
+
 import Dashboard from "@/components/Dashboard/Dashboard";
 import { useEffect } from "react";
 
 export default function Home() {
-  function reloadPage() {
-    // The last "domLoading" Time //
-    var currentDocumentTimestamp =
-    new Date(performance.timing.domLoading).getTime();
-    // Current Time //
-    var now = Date.now();
-    // Ten Seconds //
-    var tenSec = 10 * 1000;
-    // Plus Ten Seconds //
-    var plusTenSec = currentDocumentTimestamp + tenSec;
-    if (now > plusTenSec) {
-    location.reload();
-    } else {}
-   }
+  // function reloadPage() {
+  //   // The last "domLoading" Time //
+  //   var currentDocumentTimestamp =
+  //   new Date(performance?.timing?.domLoading).getTime();
+  //   // Current Time //
+  //   var now = Date.now();
+  //   // Ten Seconds //
+  //   var tenSec = 10 * 1000;
+  //   // Plus Ten Seconds //
+  //   var plusTenSec = currentDocumentTimestamp + tenSec;
+  //   if (now > plusTenSec) {
+  //   location.reload();
+  //   } else {}
+  //  }
    
-   reloadPage();
+  //  reloadPage();
 
-   useEffect(() => {
+  //  useEffect(() => {
+  //   reloadPage();
+  // }, []);
+
+  function reloadPage() {
+    if (typeof window !== 'undefined') {
+      // The last "domLoading" Time //
+      var currentDocumentTimestamp = new Date(performance.timing.domLoading).getTime();
+      // Current Time //
+      var now = Date.now();
+      // Ten Seconds //
+      var tenSec = 10 * 1000;
+      // Plus Ten Seconds //
+      var plusTenSec = currentDocumentTimestamp + tenSec;
+      if (now > plusTenSec) {
+        location.reload();
+      }
+    }
+  }
+  
+  useEffect(() => {
     reloadPage();
   }, []);
+  
 
 
 

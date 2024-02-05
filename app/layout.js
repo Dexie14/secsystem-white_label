@@ -14,8 +14,8 @@ import { ThemeProvider } from "@/context/ThemeProvider";
 const DMSans = DM_Sans({ subsets: ["latin"], display: "swap" });
 
 export const metadata = {
-  title: "BestAf App",
-  description: "Official BestAf Website",
+  title: "Secsystem App",
+  description: "Official Secsystem Website",
 };
 
 export default function RootLayout({ children }) {
