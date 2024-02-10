@@ -5,9 +5,9 @@ import Button from "../Comps/Button";
 
 import Cookies from "js-cookie";
 
-
 import { BASE_URL } from "@/utils/baseUrl";
 import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const Report = () => {
   const [merchId, setMerchId] = useState(false);
@@ -36,43 +36,46 @@ const Report = () => {
     setInputTermId("");
   };
 
-
-
-
   const handleDownload = () => {
     const url = `${BASE_URL}/admin/report?merchantId=${inputMerchId}&terminalId=${inputTermId}&startDate=${fromDate}&endDate=${toDate}`;
-    
+
     // Get the authorization token from wherever it's stored in your application (e.g., state, context, etc.)
     const token = Cookies.get("token");
-  
+
     // Use the Fetch API to initiate the download with headers
     fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then(response => {
-      if (response.ok) {
-        return response.blob();
-      } else {
-        throw new Error(`Failed to download. HTTP Status: ${response.status}`);
-      }
-    })
-    .then(blob => {
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = 're.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    })
-    .catch(error => {
-      console.error('Error during download:', error);
-    });
+      .then((response) => {
+        if (response.ok) {
+          console.log(response, "fff")
+          return response.blob();
+        } else {
+          toast.error(
+            response?.data?.status ||
+            response?.message ||
+              "Error occured"
+          );
+          throw new Error(
+            `Failed to download. HTTP Status: ${response.status}`
+          );
+        }
+      })
+      .then((blob) => {
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = "report.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.status || error?.response?.data?.message || "Error occured");
+        console.error("Error during download:", error);
+      });
   };
-  
-  
-
 
   return (
     <div className="h-[100%]">

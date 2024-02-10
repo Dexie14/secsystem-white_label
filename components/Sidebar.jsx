@@ -49,20 +49,21 @@ const Sidebar = () => {
   return (
     <aside className="bg-white min-h-[100vh] w-full relative scrol overflow-y-scroll overflow-hidden">
       <div className="px-6 py-5">
-        <section className="flex justify-between items-center">
-          <div className="flex gap-3 items-center">
+        <section className="flex items-center">
+          <div className="flex gap-3 items-center justify-center w-[90%]">
             {storedLogo !== "undefined" ? (
-              <img src={storedLogo} height={28} width={24} alt="logo" />
+              <img src={storedLogo} height={40} width={40} alt="logo" />
             ) : (
-              <Image src={logo} height={20} width={20} alt="logo" />
+              <Image src={logo} height={24} width={24} alt="logo" />
             )}
-            <h6
+            {/* <h6
               className="text-xl text-primary"
               style={{ fontFamily: "DMSans" }}
             >
               SecSystem
-            </h6>
+            </h6> */}
           </div>
+          <div className="w-[10%]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -75,6 +76,7 @@ const Sidebar = () => {
               fill="#4B5563"
             />
           </svg>
+          </div>
         </section>
 
         <section className="py-10">
